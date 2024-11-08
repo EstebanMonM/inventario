@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary">Inventario de Equipos</h1>
+            <a href="/equipos/crear" class="btn btn-success">Agregar Nuevo Equipo</a>
+        </div>
+
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (equipos.length > 0) { %>
+                    <% equipos.forEach(equipo => { %>
+                        <tr>
+                            <td>
+                                <%= equipo.nombre %>
+                            </td>
+                            <td>
+                                <%= equipo.tipo %>
+                            </td>
+                            <td>
+                                <%= equipo.marca %>
+                            </td>
+                            <td>
+                                <%= equipo.modelo %>
+                            </td>
+                            <td class="text-center">
+                                <a href="/equipos/<%= equipo._id %>/editar" class="btn btn-warning btn-sm mx-1">Editar</a>
+                                <form action="/equipos/<%= equipo._id %>/eliminar" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm mx-1">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">No hay equipos registrados.</td>
+                                </tr>
+                                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
